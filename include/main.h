@@ -9,6 +9,7 @@
 #include <nethost/nethost.h>
 #include <stdio.h>
 
+#define LIBRARY_DIR "lib/"
 #define MANAGED_LOADER_NAME "Loader"
 
 typedef int (*__libc_start_main_type)(int (*main)(int, char **, char **),
