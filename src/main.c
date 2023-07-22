@@ -4,7 +4,7 @@ int
 __libc_start_main(int (*main)(int, char **, char **), int argc, char **ubp_av, void (*init)(), void (*fini)(),
                   void (*rtld_fini)(), void *stack_end) {
     init_loader();
-    __libc_start_main_type original_start_main = (__libc_start_main_type) dlsym(RTLD_NEXT, "__libc_start_main");
+    __libc_start_main_type original_start_main = (__libc_start_main_type) dlsym((void *) -1, "__libc_start_main");
     return original_start_main(main, argc, ubp_av, init, fini, rtld_fini, stack_end);
 }
 

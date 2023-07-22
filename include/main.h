@@ -10,7 +10,7 @@
 #include <nethost/hostfxr.h>
 #include <nethost/nethost.h>
 
-char* managed_loader_name = "Loader";
+char *managed_loader_name = "Loader";
 
 typedef int (*__libc_start_main_type)(int (*main)(int, char **, char **), int argc, char **ubp_av, void (*init)(),
                                       void (*fini)(), void (*rtld_fini)(), void *stack_end);
