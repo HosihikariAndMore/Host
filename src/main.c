@@ -32,8 +32,6 @@ void init_loader()
         UNMANAGEDCALLERSONLY_METHOD,
         NULL,
         (void **)&entry_point);
-    printf("rc: %d\n", rc);
-    printf("entry_point: %p\n", entry_point);
     assert(rc == 0 && entry_point != NULL && "Failure: load_assembly_and_get_function_pointer()");
 
     entry_point();
