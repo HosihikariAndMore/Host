@@ -13,12 +13,12 @@ void init_loader() {
         assert(0 && "Failure: load_hostfxr()");
     }
 
-    const char_t *config_path = strcat(managed_loader_name, ".runtimeconfig.json");
+    const char_t *config_path = MANAGED_LOADER_NAME".runtimeconfig.json";
     load_assembly_and_get_function_pointer_fn load_assembly_and_get_function_pointer = get_dotnet_load_assembly(
             config_path);
     assert(load_assembly_and_get_function_pointer != NULL && "Failure: get_dotnet_load_assembly()");
 
-    const char_t *dotnetlib_path = strcat(managed_loader_name, ".dll");
+    const char_t *dotnetlib_path = MANAGED_LOADER_NAME".dll";
     const char_t *dotnet_type = "Loader.Main, Loader";
     const char_t *dotnet_type_method = "Initialize";
     typedef void (CORECLR_DELEGATE_CALLTYPE *entry_point_fn)();

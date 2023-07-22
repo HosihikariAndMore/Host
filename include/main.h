@@ -5,12 +5,11 @@
 #include <dlfcn.h>
 #include <limits.h>
 #include <stdio.h>
-#include <string.h>
 #include <nethost/coreclr_delegates.h>
 #include <nethost/hostfxr.h>
 #include <nethost/nethost.h>
 
-char *managed_loader_name = "Loader";
+#define MANAGED_LOADER_NAME "Loader"
 
 typedef int (*__libc_start_main_type)(int (*main)(int, char **, char **), int argc, char **ubp_av, void (*init)(),
                                       void (*fini)(), void (*rtld_fini)(), void *stack_end);
