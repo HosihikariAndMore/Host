@@ -24,7 +24,7 @@ void init_loader() {
            "Failure: get_dotnet_load_assembly()");
 
     const char_t *dotnetlib_path = LIBRARY_DIR MANAGED_LOADER_NAME ".dll";
-    const char_t *dotnet_type = "Loader.Main, Loader";
+    const char_t *dotnet_type = "Hosihikari.Loader.Main, Loader";
     const char_t *dotnet_type_method = "Initialize";
     typedef void(CORECLR_DELEGATE_CALLTYPE * entry_point_fn)();
     entry_point_fn entry_point = NULL;
