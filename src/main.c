@@ -10,7 +10,7 @@ __libc_start_main(int (*main)(int, char **, char **), int argc, char **ubp_av, v
 
 void init_loader() {
     if (!load_hostfxr()) {
-        assert(false && "Failure: load_hostfxr()");
+        assert(0 && "Failure: load_hostfxr()");
     }
 
     const char_t *config_path = strcat(managed_loader_name, ".runtimeconfig.json");
