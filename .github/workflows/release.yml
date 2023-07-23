@@ -1,0 +1,35 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+        version:
+          required: true
+          description: Version
+        prerelease:
+          type: boolean
+          required: true
+          description: Prerelease or not
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3.5.3
+
+      - name: Configure CMake
+        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+
+      - name: Build
+        run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+
+      - name: Create New Release
+        uses: ncipollo/release-action@v1.12.0
+        with:
+          prerelease: ${{ github.event.inputs.prerelease }}
+          tag: ${{ github.event.inputs.version }}
+          artifacts: build/libpreloader.so
