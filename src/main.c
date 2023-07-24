@@ -1,7 +1,10 @@
 #include <assert.h>
 #include <dlfcn.h>
 #include <dotnet.h>
+#include <limits.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 int __libc_start_main(int (*main)(int, char **, char **), int argc,
                       char **ubp_av, void (*init)(), void (*fini)(),
@@ -23,9 +26,12 @@ void init_loader() {
         assert(0 && "Failure: init_delegate_fptrs()");
     }
 
-    int rc = load_assembly_fptr(LIBRART_DIR_PATH MAIN_NAMESPACE
-                                "." PLUGIN_MANAGER_NAME ".dll",
-                                NULL, NULL);
+    char_t lib_path[PATH_MAX];
+    char *resolved = realpath(LIBRART_DIR_PATH, lib_path);
+    assert(resolved != NULL);
+    int rc = load_assembly_fptr(
+        strcat(resolved, MAIN_NAMESPACE "." PLUGIN_MANAGER_NAME ".dll"), NULL,
+        NULL);
     if (rc != 0) {
         printf("Load assembly failed: %x\n", rc);
     }
