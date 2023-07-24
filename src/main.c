@@ -18,27 +18,31 @@ void init_loader() {
         assert(0 && "Failure: load_hostfxr()");
     }
 
-    if (init_delegate_fptrs(LIBRART_DIR_PATH MAIN_NAMESPACE
-                            "." ASSEMBLY_LOADER_NAME ".runtimeconfig.json")) {
+    if (!init_delegate_fptrs(LIBRART_DIR_PATH MAIN_NAMESPACE
+                             "." ASSEMBLY_LOADER_NAME ".runtimeconfig.json")) {
         assert(0 && "Failure: init_delegate_fptrs()");
     }
 
-    load_assembly_fptr(LIBRART_DIR_PATH MAIN_NAMESPACE "." PLUGIN_MANAGER_NAME
-                                                       ".dll",
-                       NULL, NULL);
+    int rc = load_assembly_fptr(LIBRART_DIR_PATH MAIN_NAMESPACE
+                                "." PLUGIN_MANAGER_NAME ".dll",
+                                NULL, NULL);
+    if (rc != 0) {
+        printf("Load assembly failed: %x\n", rc);
+    }
+    assert(rc == 0 && "Failure: load_assembly()");
 
     typedef void(CORECLR_DELEGATE_CALLTYPE * entry_point_fn)();
     entry_point_fn entry_point = NULL;
-    int rc = load_assembly_and_get_function_pointer_fptr(
+    rc = load_assembly_and_get_function_pointer_fptr(
         LIBRART_DIR_PATH MAIN_NAMESPACE "." ASSEMBLY_LOADER_NAME ".dll",
         MAIN_NAMESPACE "." ASSEMBLY_LOADER_NAME ".Main, " MAIN_NAMESPACE
                        "." ASSEMBLY_LOADER_NAME,
         "Initialize", UNMANAGEDCALLERSONLY_METHOD, NULL, (void **)&entry_point);
     if (rc != 0) {
         printf("Load assembly and get function pointer failed: %x\n", rc);
-        assert(rc == 0 && entry_point != NULL &&
-               "Failure: load_assembly_and_get_function_pointer()");
     }
+    assert(rc == 0 && entry_point != NULL &&
+           "Failure: load_assembly_and_get_function_pointer()");
 
     entry_point();
 }
