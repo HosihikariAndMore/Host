@@ -44,18 +44,13 @@ int init_delegate_fptrs(const char_t *config_path) {
     int rc = init_fptr(config_path, NULL, &cxt);
     if (rc != 0 || cxt == NULL) {
         printf("Init failed: %x\n", rc);
-        if (rc == 0x80008093) {
-            printf(
-                "Please check your runtime config file (in "
-                "./lib/Hosihikari.AssemblyLoader.runtimeconfig.json)\n");
-        }
         close_fptr(cxt);
         return 0;
     }
 
-    rc =
-        get_delegate_fptr(cxt, hdt_load_assembly_and_get_function_pointer,
-                          (void **)load_assembly_and_get_function_pointer_fptr);
+    rc = get_delegate_fptr(
+        cxt, hdt_load_assembly_and_get_function_pointer,
+        (void **)&load_assembly_and_get_function_pointer_fptr);
     if (rc != 0 || load_assembly_and_get_function_pointer_fptr == NULL) {
         printf(
             "Get delegate load_assembly_and_get_function_pointer failed: %x\n",
@@ -72,7 +67,8 @@ int init_delegate_fptrs(const char_t *config_path) {
     //        return 0;
     //    }
 
-    rc = get_delegate_fptr(cxt, hdt_load_assembly, (void **)load_assembly_fptr);
+    rc =
+        get_delegate_fptr(cxt, hdt_load_assembly, (void **)&load_assembly_fptr);
     if (rc != 0 || load_assembly_fptr == NULL) {
         printf("Get delegate load_assembly failed: %x\n", rc);
         close_fptr(cxt);

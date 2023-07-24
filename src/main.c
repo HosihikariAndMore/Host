@@ -1,6 +1,7 @@
 #include <assert.h>
 #include <dlfcn.h>
 #include <dotnet.h>
+#include <stdio.h>
 
 int __libc_start_main(int (*main)(int, char **, char **), int argc,
                       char **ubp_av, void (*init)(), void (*fini)(),
@@ -17,24 +18,27 @@ void init_loader() {
         assert(0 && "Failure: load_hostfxr()");
     }
 
-    const char_t *config_path =
-        "lib/Hosihikari.AssemblyLoader.runtimeconfig.json";
-    if (init_delegate_fptrs(config_path)) {
+    if (init_delegate_fptrs(LIBRART_DIR_PATH MAIN_NAMESPACE
+                            "." ASSEMBLY_LOADER_NAME ".runtimeconfig.json")) {
         assert(0 && "Failure: init_delegate_fptrs()");
     }
 
-    const char_t *dotnetlib_path = "lib/Hosihikari.AssemblyLoader.dll";
-    const char_t *dotnet_type =
-        "Hosihikari.AssemblyLoader.Main, Hosihikari.AssemblyLoader";
-    const char_t *dotnet_type_method = "Initialize";
+    load_assembly_fptr(LIBRART_DIR_PATH MAIN_NAMESPACE "." PLUGIN_MANAGER_NAME
+                                                       ".dll",
+                       NULL, NULL);
+
     typedef void(CORECLR_DELEGATE_CALLTYPE * entry_point_fn)();
     entry_point_fn entry_point = NULL;
     int rc = load_assembly_and_get_function_pointer_fptr(
-        dotnetlib_path, dotnet_type, dotnet_type_method,
-        UNMANAGEDCALLERSONLY_METHOD, NULL, (void **)&entry_point);
-    assert(rc == 0 && entry_point != NULL &&
-           "Failure: load_assembly_and_get_function_pointer()");
-    load_assembly_fptr("lib/Hosihikari.PluginManager.dll", NULL, NULL);
+        LIBRART_DIR_PATH MAIN_NAMESPACE "." ASSEMBLY_LOADER_NAME ".dll",
+        MAIN_NAMESPACE "." ASSEMBLY_LOADER_NAME ".Main, " MAIN_NAMESPACE
+                       "." ASSEMBLY_LOADER_NAME,
+        "Initialize", UNMANAGEDCALLERSONLY_METHOD, NULL, (void **)&entry_point);
+    if (rc != 0) {
+        printf("Load assembly and get function pointer failed: %x\n", rc);
+        assert(rc == 0 && entry_point != NULL &&
+               "Failure: load_assembly_and_get_function_pointer()");
+    }
 
     entry_point();
 }
