@@ -30,8 +30,8 @@ void init_loader() {
     char *resolved = realpath(LIBRART_DIR_PATH, lib_path);
     assert(resolved != NULL);
     int rc = load_assembly_fptr(
-        strcat(resolved, MAIN_NAMESPACE "." PLUGIN_MANAGER_NAME ".dll"), NULL,
-        NULL);
+        strcat(resolved, "/" MAIN_NAMESPACE "." PLUGIN_MANAGER_NAME ".dll"),
+        NULL, NULL);
     if (rc != 0) {
         printf("Load assembly failed: %x\n", rc);
     }
