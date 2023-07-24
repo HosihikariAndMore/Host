@@ -17,14 +17,15 @@ void init_loader() {
         assert(0 && "Failure: load_hostfxr()");
     }
 
-    const char_t *config_path = "lib/AssemblyLoader.runtimeconfig.json";
+    const char_t *config_path =
+        "lib/Hosihikari.AssemblyLoader.runtimeconfig.json";
     if (init_delegate_fptrs(config_path)) {
         assert(0 && "Failure: init_delegate_fptrs()");
     }
 
-    const char_t *dotnetlib_path = "lib/AssemblyLoader.dll";
+    const char_t *dotnetlib_path = "lib/Hosihikari.AssemblyLoader.dll";
     const char_t *dotnet_type =
-        "Hosihikari.AssemblyLoader.Main, AssemblyLoader";
+        "Hosihikari.AssemblyLoader.Main, Hosihikari.AssemblyLoader";
     const char_t *dotnet_type_method = "Initialize";
     typedef void(CORECLR_DELEGATE_CALLTYPE * entry_point_fn)();
     entry_point_fn entry_point = NULL;
@@ -33,7 +34,7 @@ void init_loader() {
         UNMANAGEDCALLERSONLY_METHOD, NULL, (void **)&entry_point);
     assert(rc == 0 && entry_point != NULL &&
            "Failure: load_assembly_and_get_function_pointer()");
-    load_assembly_fptr("lib/PluginManager.dll", NULL, NULL);
+    load_assembly_fptr("lib/Hosihikari.PluginManager.dll", NULL, NULL);
 
     entry_point();
 }

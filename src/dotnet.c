@@ -44,6 +44,11 @@ int init_delegate_fptrs(const char_t *config_path) {
     int rc = init_fptr(config_path, NULL, &cxt);
     if (rc != 0 || cxt == NULL) {
         printf("Init failed: %x\n", rc);
+        if (rc == 0x80008093) {
+            printf(
+                "Please check your runtime config file (in "
+                "./lib/Hosihikari.AssemblyLoader.runtimeconfig.json)\n");
+        }
         close_fptr(cxt);
         return 0;
     }
