@@ -10,6 +10,6 @@ link_directories(
         "lib/nethost"
 )
 
-add_library(preloader SHARED src/main.c)
+add_library(preloader SHARED src/main.c src/dotnet.c)
 
 target_link_libraries(preloader "libnethost.a")

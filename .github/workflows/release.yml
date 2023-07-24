@@ -3,13 +3,13 @@ name: Release
 on:
   workflow_dispatch:
     inputs:
-        version:
-          required: true
-          description: Version
-        prerelease:
-          type: boolean
-          required: true
-          description: Prerelease or not
+      version:
+        required: true
+        description: Version
+      prerelease:
+        type: boolean
+        required: true
+        description: Prerelease or not
 
 env:
   BUILD_TYPE: Release
