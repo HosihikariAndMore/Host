@@ -27,28 +27,40 @@ void init_loader() {
     }
 
     char_t lib_path[PATH_MAX];
-    char *resolved = realpath(LIBRART_DIR_PATH, lib_path);
+    char *resolved = strcat(realpath(LIBRART_DIR_PATH, lib_path), "/");
     assert(resolved != NULL);
-    int rc = load_assembly_fptr(
-        strcat(resolved, "/" MAIN_NAMESPACE "." PLUGIN_MANAGER_NAME ".dll"),
-        NULL, NULL);
+
+    char_t plugin_manager_path[PATH_MAX];
+    strcpy(plugin_manager_path, lib_path);
+    strcat(plugin_manager_path, MAIN_NAMESPACE "." PLUGIN_MANAGER_NAME ".dll");
+    int rc = load_assembly_fptr(plugin_manager_path, NULL, NULL);
     if (rc != 0) {
-        printf("Load assembly failed: %x\n", rc);
+        printf("Load assembly plugin manager failed: %x\n", rc);
+    }
+    assert(rc == 0 && "Failure: load_assembly()");
+
+    char_t assembly_loader_path[PATH_MAX];
+    strcpy(assembly_loader_path, lib_path);
+    strcat(assembly_loader_path,
+           MAIN_NAMESPACE "." ASSEMBLY_LOADER_NAME ".dll");
+    rc = load_assembly_fptr(assembly_loader_path, NULL, NULL);
+    if (rc != 0) {
+        printf("Load assembly assembly loader failed: %x\n", rc);
     }
     assert(rc == 0 && "Failure: load_assembly()");
 
     typedef void(CORECLR_DELEGATE_CALLTYPE * entry_point_fn)();
     entry_point_fn entry_point = NULL;
-    rc = load_assembly_and_get_function_pointer_fptr(
-        LIBRART_DIR_PATH MAIN_NAMESPACE "." ASSEMBLY_LOADER_NAME ".dll",
-        MAIN_NAMESPACE "." ASSEMBLY_LOADER_NAME ".Main, " MAIN_NAMESPACE
-                       "." ASSEMBLY_LOADER_NAME,
-        "Initialize", UNMANAGEDCALLERSONLY_METHOD, NULL, (void **)&entry_point);
+    rc = get_function_pointer_fptr(MAIN_NAMESPACE "." ASSEMBLY_LOADER_NAME
+                                                  ".Main, " MAIN_NAMESPACE
+                                                  "." ASSEMBLY_LOADER_NAME,
+                                   "Initialize", UNMANAGEDCALLERSONLY_METHOD,
+                                   NULL, NULL, (void **)&entry_point);
     if (rc != 0) {
-        printf("Load assembly and get function pointer failed: %x\n", rc);
+        printf("Get function pointer failed: %x\n", rc);
     }
     assert(rc == 0 && entry_point != NULL &&
-           "Failure: load_assembly_and_get_function_pointer()");
+           "Failure: get_function_pointer()");
 
     entry_point();
 }

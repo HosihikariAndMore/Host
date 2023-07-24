@@ -3,9 +3,8 @@
 
 #include <main.h>
 
-extern load_assembly_and_get_function_pointer_fn
-    load_assembly_and_get_function_pointer_fptr;
 extern load_assembly_fn load_assembly_fptr;
+extern get_function_pointer_fn get_function_pointer_fptr;
 
 extern hostfxr_initialize_for_runtime_config_fn init_fptr;
 extern hostfxr_get_runtime_delegate_fn get_delegate_fptr;

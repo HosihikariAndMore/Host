@@ -5,9 +5,8 @@
 #include <stddef.h>
 #include <stdio.h>
 
-load_assembly_and_get_function_pointer_fn
-    load_assembly_and_get_function_pointer_fptr;
 load_assembly_fn load_assembly_fptr;
+get_function_pointer_fn get_function_pointer_fptr;
 
 hostfxr_initialize_for_runtime_config_fn init_fptr;
 hostfxr_get_runtime_delegate_fn get_delegate_fptr;
@@ -46,17 +45,6 @@ int init_delegate_fptrs(const char_t *config_path) {
         return 0;
     }
 
-    rc = get_delegate_fptr(
-        cxt, hdt_load_assembly_and_get_function_pointer,
-        (void **)&load_assembly_and_get_function_pointer_fptr);
-    if (rc != 0 || load_assembly_and_get_function_pointer_fptr == NULL) {
-        printf(
-            "Get delegate load assembly and get function pointer failed: %x\n",
-            rc);
-        close_fptr(cxt);
-        return 0;
-    }
-
     rc =
         get_delegate_fptr(cxt, hdt_load_assembly, (void **)&load_assembly_fptr);
     if (rc != 0 || load_assembly_fptr == NULL) {
@@ -65,6 +53,14 @@ int init_delegate_fptrs(const char_t *config_path) {
         return 0;
     }
 
+    rc = get_delegate_fptr(cxt, hdt_get_function_pointer,
+                           (void **)&get_function_pointer_fptr);
+    if (rc != 0 || get_function_pointer_fptr == NULL) {
+        printf("Get delegate get function pointer failed: %x\n", rc);
+        close_fptr(cxt);
+        return 0;
+    }
+
     close_fptr(cxt);
-    return load_assembly_and_get_function_pointer_fptr && load_assembly_fptr;
+    return load_assembly_fptr && get_function_pointer_fptr;
 }
