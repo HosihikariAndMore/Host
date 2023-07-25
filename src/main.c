@@ -22,7 +22,7 @@ void init_loader() {
     }
 
     if (!init_delegate_fptrs(LIBRART_DIR_PATH MAIN_NAMESPACE
-                             "." ASSEMBLY_LOADER_NAME ".runtimeconfig.json")) {
+                             "." PLUGIN_MANAGER_NAME ".runtimeconfig.json")) {
         assert(0 && "Failure: init_delegate_fptrs()");
     }
 
@@ -35,32 +35,21 @@ void init_loader() {
     strcat(plugin_manager_path, MAIN_NAMESPACE "." PLUGIN_MANAGER_NAME ".dll");
     int rc = load_assembly_fptr(plugin_manager_path, NULL, NULL);
     if (rc != 0) {
-        printf("Load assembly plugin manager failed: %x\n", rc);
-    }
-    assert(rc == 0 && "Failure: load_assembly()");
-
-    char_t assembly_loader_path[PATH_MAX];
-    strcpy(assembly_loader_path, lib_path);
-    strcat(assembly_loader_path,
-           MAIN_NAMESPACE "." ASSEMBLY_LOADER_NAME ".dll");
-    rc = load_assembly_fptr(assembly_loader_path, NULL, NULL);
-    if (rc != 0) {
-        printf("Load assembly assembly loader failed: %x\n", rc);
+        printf("Load assembly plugin manager failed: 0x%x\n", rc);
     }
     assert(rc == 0 && "Failure: load_assembly()");
 
     typedef void(CORECLR_DELEGATE_CALLTYPE * entry_point_fn)();
     entry_point_fn entry_point = NULL;
-    rc = get_function_pointer_fptr(MAIN_NAMESPACE "." ASSEMBLY_LOADER_NAME
+    rc = get_function_pointer_fptr(MAIN_NAMESPACE "." PLUGIN_MANAGER_NAME
                                                   ".Main, " MAIN_NAMESPACE
-                                                  "." ASSEMBLY_LOADER_NAME,
+                                                  "." PLUGIN_MANAGER_NAME,
                                    "Initialize", UNMANAGEDCALLERSONLY_METHOD,
                                    NULL, NULL, (void **)&entry_point);
     if (rc != 0) {
-        printf("Get function pointer failed: %x\n", rc);
+        printf("Get function pointer failed: 0x%x\n", rc);
     }
-    assert(rc == 0 && entry_point != NULL &&
-           "Failure: get_function_pointer()");
+    assert(rc == 0 && entry_point != NULL && "Failure: get_function_pointer()");
 
     entry_point();
 }

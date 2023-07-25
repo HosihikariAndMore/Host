@@ -16,7 +16,6 @@ void init_loader();
 
 #define LIBRART_DIR_PATH "lib/"
 #define MAIN_NAMESPACE "Hosihikari"
-#define ASSEMBLY_LOADER_NAME "AssemblyLoader"
 #define PLUGIN_MANAGER_NAME "PluginManager"
 
 #endif  // PRELOADER_MAIN_H
