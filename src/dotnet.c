@@ -1,8 +1,6 @@
 #include <dlfcn.h>
 #include <dotnet.h>
 #include <limits.h>
-#include <stddef.h>
-#include <stdio.h>
 
 load_assembly_fn load_assembly_fptr;
 get_function_pointer_fn get_function_pointer_fptr;
