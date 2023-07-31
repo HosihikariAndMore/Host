@@ -12,9 +12,9 @@ typedef int (*__libc_start_main_type)(int (*)(int, char **, char **), int,
 int __libc_start_main(int (*)(int, char **, char **), int, char **,
                       void (*init)(), void (*)(), void (*)(), void *);
 
-void init_loader();
+void init_loading();
 
-#define LIBRART_DIR_PATH "lib/"
+#define LIBRARY_DIR_PATH "lib/"
 #define MAIN_NAMESPACE "Hosihikari"
 #define PLUGIN_MANAGER_NAME "PluginManager"
 
