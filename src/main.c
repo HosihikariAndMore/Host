@@ -27,11 +27,9 @@ void init_loading() {
         printf("Failed to get functions from hostfxr: 0x%x\n", rc);
         return;
     }
-    char_t lib_path[PATH_MAX];
-    strcat(realpath(LIBRARY_DIR_PATH, lib_path), "/");
     char_t plugin_manager_path[PATH_MAX];
-    strcpy(plugin_manager_path, lib_path);
-    strcat(plugin_manager_path, MAIN_NAMESPACE "." PLUGIN_MANAGER_NAME ".dll");
+    strcat(strcat(realpath(LIBRARY_DIR_PATH, plugin_manager_path), "/"),
+           MAIN_NAMESPACE "." PLUGIN_MANAGER_NAME ".dll");
     rc = load_assembly_fptr(plugin_manager_path, NULL, NULL);
     if (rc != 0) {
         printf("Failed to load plugin management: 0x%x\n", rc);
