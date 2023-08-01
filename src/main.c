@@ -22,26 +22,26 @@ void init_loading() {
         return;
     }
     rc = init_delegate_fptrs(LIBRARY_DIR_PATH MAIN_NAMESPACE
-                             "." PLUGIN_MANAGER_NAME ".runtimeconfig.json");
+                             "." PLUGIN_MANAGEMENT_NAME ".runtimeconfig.json");
     if (rc != 0) {
         printf("Failed to get functions from hostfxr: 0x%x\n", rc);
         return;
     }
-    char_t plugin_manager_path[PATH_MAX];
-    strcat(strcat(realpath(LIBRARY_DIR_PATH, plugin_manager_path), "/"),
-           MAIN_NAMESPACE "." PLUGIN_MANAGER_NAME ".dll");
-    rc = load_assembly_fptr(plugin_manager_path, NULL, NULL);
+    char_t plugin_management_path[PATH_MAX];
+    strcat(strcat(realpath(LIBRARY_DIR_PATH, plugin_management_path), "/"),
+           MAIN_NAMESPACE "." PLUGIN_MANAGEMENT_NAME ".dll");
+    rc = load_assembly_fptr(plugin_management_path, NULL, NULL);
     if (rc != 0) {
         printf("Failed to load plugin management: 0x%x\n", rc);
         return;
     }
     typedef void(CORECLR_DELEGATE_CALLTYPE * entry_point_fn)();
     entry_point_fn entry_point = NULL;
-    rc = get_function_pointer_fptr(MAIN_NAMESPACE "." PLUGIN_MANAGER_NAME
-                                                  ".Main, " MAIN_NAMESPACE
-                                                  "." PLUGIN_MANAGER_NAME,
-                                   "Initialize", UNMANAGEDCALLERSONLY_METHOD,
-                                   NULL, NULL, (void **)&entry_point);
+    rc = get_function_pointer_fptr(
+        MAIN_NAMESPACE "." PLUGIN_MANAGEMENT_NAMESPACE ".Main, " MAIN_NAMESPACE
+                       "." PLUGIN_MANAGEMENT_NAME,
+        "Initialize", UNMANAGEDCALLERSONLY_METHOD, NULL, NULL,
+        (void **)&entry_point);
     if (rc != 0) {
         printf("Failed to get entry point from plugin management: 0x%x\n", rc);
         return;

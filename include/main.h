@@ -16,6 +16,7 @@ void init_loading();
 
 #define LIBRARY_DIR_PATH "lib/"
 #define MAIN_NAMESPACE "Hosihikari"
-#define PLUGIN_MANAGER_NAME "PluginManager"
+#define PLUGIN_MANAGEMENT_NAME "PluginManager"
+#define PLUGIN_MANAGEMENT_NAMESPACE "PluginManagement"
 
 #endif  // PRELOADER_MAIN_H
