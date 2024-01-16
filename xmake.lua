@@ -40,7 +40,7 @@ add_requires("levilamina")
 --         import("package.tools.xmake").install(package)
 --     end)
 
-target("Hosihikari") -- Change this to your plugin name.
+target("Hosihikari.Preload") -- Change this to your plugin name.
     add_cxflags(
         "/EHa",
         "/utf-8"
