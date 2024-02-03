@@ -10,7 +10,7 @@ int __libc_start_main(int (*main)(int, char **, char **), int argc,
                       void (*rtld_fini)(), void *stack_end) {
     init_loading();
     __libc_start_main_type original_start_main =
-        (__libc_start_main_type)dlsym((void *)-1, "__libc_start_main");
+        dlsym((void *)-1, "__libc_start_main");
     return original_start_main(main, argc, ubp_av, init, fini, rtld_fini,
                                stack_end);
 }

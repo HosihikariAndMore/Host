@@ -9,8 +9,8 @@ typedef int (*__libc_start_main_type)(int (*)(int, char **, char **), int,
                                       char **, void (*)(), void (*)(),
                                       void (*)(), void *);
 
-int __libc_start_main(int (*)(int, char **, char **), int, char **,
-                      void (*init)(), void (*)(), void (*)(), void *);
+int __libc_start_main(int (*)(int, char **, char **), int, char **, void (*)(),
+                      void (*)(), void (*)(), void *);
 
 void init_loading();
 
