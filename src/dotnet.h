@@ -1,7 +1,7 @@
 #ifndef PRELOADER_NETHOST_H
 #define PRELOADER_NETHOST_H
 
-#include <main.h>
+#include "main.h"
 
 extern load_assembly_fn load_assembly_fptr;
 extern get_function_pointer_fn get_function_pointer_fptr;

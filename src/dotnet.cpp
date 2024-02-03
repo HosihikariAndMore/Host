@@ -1,4 +1,4 @@
-#include <dotnet.h>
+#include "dotnet.h"
 #include <Windows.h>
 
 load_assembly_fn load_assembly_fptr;
