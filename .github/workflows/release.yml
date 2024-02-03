@@ -22,7 +22,7 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          name: Hosihikari.Preload-windows-x64-${{ github.sha }}
+          name: Hosihikari.${{ github.event.repository.name }}-windows-x64-${{ github.sha }}
           path: |
             bin/
 
@@ -37,7 +37,7 @@ jobs:
 
       - uses: actions/download-artifact@v3
         with:
-          name: Hosihikari.Preload-windows-x64-${{ github.sha }}
+          name: Hosihikari.${{ github.event.repository.name }}-windows-x64-${{ github.sha }}
           path: release/
 
       - name: Archive release
