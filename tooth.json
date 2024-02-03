@@ -1,0 +1,26 @@
+{
+    "format_version": 2,
+    "tooth": "github.com/Hosihikari-extra/LeviLaminaPreload",
+    "version": "1.0.0",
+    "info": {
+        "name": "Hosihikari.Preload",
+        "description": "CLR hosting for LeviLamina",
+        "author": "Hosihikari Community",
+        "tags": []
+    },
+    "platforms": [
+        {
+            "goos": "windows",
+            "goarch": "amd64",
+            "asset_url": "https://github.com/Hosihikari-extra/LeviLaminaPreload/releases/download/1.0.0/hosihikari.preload.win-x64.zip",
+            "files": {
+                "place": [
+                    {
+                        "src": "*",
+                        "dest": "plugins/"
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -22,7 +22,7 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          name: ${{ github.event.repository.name }}-windows-x64-${{ github.sha }}
+          name: Hosihikari.Preload-windows-x64-${{ github.sha }}
           path: |
             bin/
 
@@ -31,26 +31,23 @@ jobs:
       - build
     permissions:
       contents: write
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/download-artifact@v3
         with:
-          name: ${{ github.event.repository.name }}-windows-x64-${{ github.sha }}
+          name: Hosihikari.Preload-windows-x64-${{ github.sha }}
           path: release/
-
-      - run: |
-          cp LICENSE README.md release/
 
       - name: Archive release
         run: |
           cd release
-          zip -r ../${{ github.event.repository.name }}-windows-x64.zip *
+          zip -r ../hosihikari.preload.win-x64.zip *
           cd ..
 
       - uses: softprops/action-gh-release@v1
         with:
           append_body: true
           files: |
-            ${{ github.event.repository.name }}-windows-x64.zip
+            hosihikari.preload.win-x64.zip
