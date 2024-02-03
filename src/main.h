@@ -8,7 +8,7 @@
 
 void init_loading(ll::Logger&);
 
-#define LIBRARY_DIR_PATH L".\\plugins\\" MAIN_NAMESPACE ".Preload\\"
+#define LIBRARY_DIR_PATH L".\\plugins\\" MAIN_NAMESPACE "\\"
 #define MAIN_NAMESPACE "Hosihikari"
 #define PLUGIN_MANAGEMENT_NAME "PluginManager"
 #define PLUGIN_MANAGEMENT_NAMESPACE L"PluginManagement"
