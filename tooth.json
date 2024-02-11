@@ -6,7 +6,7 @@
         "name": "Preloading of 星光",
         "description": "CLR hosting of LeviLamina",
         "author": "星光 Community",
-        "tags": [ "Hosihikari", "dotNET", "Hosting", "Preload", "CLR" ]
+        "tags": ["Hosihikari", "dotNET", "Hosting", "Preload", "CLR"]
     },
     "platforms": [
         {
@@ -21,11 +21,11 @@
                     {
                         "src": "Hosihikari/*",
                         "dest": "plugins/Hosihikari"
-                    },
-                    "remove": [
-                        "plugins/Hosihikari/Hosihikari.Preload.dll",
-                        "plugins/Hosihikari/manifest.json"
-                    ]
+                    }
+                ],
+                "remove": [
+                    "plugins/Hosihikari/Hosihikari.Preload.dll",
+                    "plugins/Hosihikari/manifest.json"
                 ]
             }
         }
