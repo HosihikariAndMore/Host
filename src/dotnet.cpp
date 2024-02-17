@@ -1,17 +1,17 @@
-#include <dotnet.h>
 #include <Windows.h>
+#include <dotnet.h>
 
-load_assembly_fn load_assembly_fptr;
+load_assembly_fn        load_assembly_fptr;
 get_function_pointer_fn get_function_pointer_fptr;
 
 hostfxr_initialize_for_runtime_config_fn init_fptr;
-hostfxr_get_runtime_delegate_fn get_delegate_fptr;
-hostfxr_close_fn close_fptr;
+hostfxr_get_runtime_delegate_fn          get_delegate_fptr;
+hostfxr_close_fn                         close_fptr;
 
 int load_hostfxr() {
     char_t buffer[MAX_PATH];
     size_t buffer_size = sizeof(buffer) / sizeof(char_t);
-    int rc = get_hostfxr_path(buffer, &buffer_size, nullptr);
+    int    rc          = get_hostfxr_path(buffer, &buffer_size, nullptr);
     if (rc != 0) {
         return rc;
     }
@@ -19,14 +19,13 @@ int load_hostfxr() {
     if (lib == nullptr) {
         return -1;
     }
-    init_fptr = (hostfxr_initialize_for_runtime_config_fn)::GetProcAddress(
-        lib, "hostfxr_initialize_for_runtime_config");
+    init_fptr =
+        (hostfxr_initialize_for_runtime_config_fn)::GetProcAddress(lib, "hostfxr_initialize_for_runtime_config");
     if (init_fptr == nullptr) {
         ::FreeLibrary(lib);
         return -1;
     }
-    get_delegate_fptr = (hostfxr_get_runtime_delegate_fn)::GetProcAddress(
-        lib, "hostfxr_get_runtime_delegate");
+    get_delegate_fptr = (hostfxr_get_runtime_delegate_fn)::GetProcAddress(lib, "hostfxr_get_runtime_delegate");
     if (get_delegate_fptr == nullptr) {
         ::FreeLibrary(lib);
         return -1;
@@ -39,21 +38,19 @@ int load_hostfxr() {
     return 0;
 }
 
-int init_delegate_fptrs(const char_t *config_path) {
+int init_delegate_fptrs(const char_t* config_path) {
     hostfxr_handle cxt = nullptr;
-    int rc = init_fptr(config_path, nullptr, &cxt);
+    int            rc  = init_fptr(config_path, nullptr, &cxt);
     if (rc != 0 || cxt == nullptr) {
         close_fptr(cxt);
         return rc;
     }
-    rc =
-        get_delegate_fptr(cxt, hdt_load_assembly, (void **)&load_assembly_fptr);
+    rc = get_delegate_fptr(cxt, hdt_load_assembly, (void**)&load_assembly_fptr);
     if (rc != 0 || load_assembly_fptr == nullptr) {
         close_fptr(cxt);
         return rc;
     }
-    rc = get_delegate_fptr(cxt, hdt_get_function_pointer,
-                           (void **)&get_function_pointer_fptr);
+    rc = get_delegate_fptr(cxt, hdt_get_function_pointer, (void**)&get_function_pointer_fptr);
     if (rc != 0 || get_function_pointer_fptr == nullptr) {
         close_fptr(cxt);
         return rc;

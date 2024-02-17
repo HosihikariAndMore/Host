@@ -14,18 +14,14 @@
             "goarch": "amd64",
             "asset_url": "https://github.com/Hosihikari-extra/Preload/releases/download/v1.0.0/hosihikari.preload.win-x64.zip",
             "prerequisites": {
-                "github.com/LiteLDev/LeviLamina": "0.7.x"
+                "github.com/LiteLDev/LeviLamina": "0.8.x"
             },
             "files": {
                 "place": [
                     {
                         "src": "Hosihikari/*",
-                        "dest": "plugins/Hosihikari"
+                        "dest": "plugins/Hosihikari/"
                     }
-                ],
-                "remove": [
-                    "plugins/Hosihikari/Hosihikari.Preload.dll",
-                    "plugins/Hosihikari/manifest.json"
                 ]
             }
         }

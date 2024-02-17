@@ -10,7 +10,15 @@ jobs:
       - uses: actions/checkout@v4
 
       - uses: xmake-io/github-action-setup-xmake@v1
-      
+
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/AppData/Local/.xmake
+          key: xmake-${{ hashFiles('xmake.lua') }}
+          restore-keys: |
+            xmake-
+
       - run: |
           xmake repo -u
 
@@ -18,9 +26,9 @@ jobs:
           xmake f -a x64 -m release -p windows -v -y
 
       - run: |
-          xmake -w -y
+          xmake -v -w -y
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: Hosihikari.${{ github.event.repository.name }}-windows-x64-${{ github.sha }}
           path: |
@@ -35,19 +43,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: Hosihikari.${{ github.event.repository.name }}-windows-x64-${{ github.sha }}
-          path: release/
+          path: artifact
 
-      - name: Archive release
-        run: |
-          cd release
+      - run: |
+          cp LICENSE.md artifact/
+
+      - run: |
           zip -r ../hosihikari.preload.win-x64.zip *
-          cd ..
+        working-directory: artifact
 
       - uses: softprops/action-gh-release@v1
         with:
-          append_body: true
           files: |
             hosihikari.preload.win-x64.zip
