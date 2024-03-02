@@ -1,5 +1,5 @@
-#ifndef PRELOADER_NETHOST_H
-#define PRELOADER_NETHOST_H
+#ifndef HOSTING_NETHOST_H
+#define HOSTING_NETHOST_H
 
 #include <main.h>
 
@@ -14,4 +14,4 @@ int load_hostfxr();
 
 int init_delegate_fptrs(const char_t *);
 
-#endif  // PRELOADER_NETHOST_H
+#endif  // HOSTING_NETHOST_H

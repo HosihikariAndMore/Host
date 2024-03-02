@@ -32,4 +32,4 @@ jobs:
         with:
           prerelease: ${{ github.event.inputs.prerelease }}
           tag: ${{ github.event.inputs.version }}
-          artifacts: build/libpreload.so
+          artifacts: build/libhost.so
