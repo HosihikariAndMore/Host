@@ -52,10 +52,10 @@ jobs:
           cp LICENSE.md artifact/
 
       - run: |
-          zip -r ../hosihikari.preload.win-x64.zip *
+          zip -r ../hosihikari.host.win-x64.zip *
         working-directory: artifact
 
       - uses: softprops/action-gh-release@v1
         with:
           files: |
-            hosihikari.preload.win-x64.zip
+            hosihikari.host.win-x64.zip

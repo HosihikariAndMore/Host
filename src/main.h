@@ -1,5 +1,5 @@
-#ifndef PRELOADER_MAIN_H
-#define PRELOADER_MAIN_H
+#ifndef HOSTING_MAIN_H
+#define HOSTING_MAIN_H
 
 #include <ll/api/logger.h>
 #include <nethost/coreclr_delegates.h>
@@ -13,4 +13,4 @@ void init_loading(ll::Logger&);
 #define PLUGIN_MANAGEMENT_NAME      "PluginManager"
 #define PLUGIN_MANAGEMENT_NAMESPACE L"PluginManagement"
 
-#endif // PRELOADER_MAIN_H
+#endif // HOSTING_MAIN_H

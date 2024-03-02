@@ -1,18 +1,18 @@
 {
     "format_version": 2,
-    "tooth": "github.com/Hosihikari-extra/Preload",
+    "tooth": "github.com/HosihikariAndMore/Host",
     "version": "1.0.0",
     "info": {
-        "name": "Preloading of 星光",
+        "name": "Host of 星光",
         "description": "CLR hosting of LeviLamina",
         "author": "星光 Community",
-        "tags": ["Hosihikari", "dotNET", "Hosting", "Preload", "CLR"]
+        "tags": ["Hosihikari", "dotNET", "Hosting", "CoreCLR", "CLR"]
     },
     "platforms": [
         {
             "goos": "windows",
             "goarch": "amd64",
-            "asset_url": "https://github.com/Hosihikari-extra/Preload/releases/download/v1.0.0/hosihikari.preload.win-x64.zip",
+            "asset_url": "https://github.com/HosihikariAndMore/Host/releases/download/v1.0.0/hosihikari.host.win-x64.zip",
             "prerequisites": {
                 "github.com/LiteLDev/LeviLamina": "0.8.x"
             },

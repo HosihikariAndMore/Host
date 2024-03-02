@@ -10,7 +10,7 @@ end
 
 local pluginName = "Hosihikari"
 
-target(pluginName .. ".Preload") -- Change this to your plugin name.
+target(pluginName .. ".Host") -- Change this to your plugin name.
     add_cxflags(
         "/EHa", -- To catch both structured (asynchronous) and standard C++ (synchronous) exceptions.
         "/utf-8" -- To enable UTF-8 source code.

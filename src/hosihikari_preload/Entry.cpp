@@ -11,7 +11,7 @@
 #include <memory>
 #include <stdexcept>
 
-namespace hosihikari_preload {
+namespace hosihikari_host {
 
 namespace {
 
@@ -46,19 +46,19 @@ auto getSelfPluginInstance() -> ll::plugin::NativePlugin& {
     return *selfPluginInstance;
 }
 
-} // namespace hosihikari_preload
+} // namespace hosihikari_host
 
 extern "C" {
 _declspec(dllexport) auto ll_plugin_disable(ll::plugin::NativePlugin& self) -> bool {
-    return hosihikari_preload::disable(self);
+    return hosihikari_host::disable(self);
 }
 _declspec(dllexport) auto ll_plugin_enable(ll::plugin::NativePlugin& self) -> bool {
-    return hosihikari_preload::enable(self);
+    return hosihikari_host::enable(self);
 }
 _declspec(dllexport) auto ll_plugin_load(ll::plugin::NativePlugin& self) -> bool {
-    return hosihikari_preload::load(self);
+    return hosihikari_host::load(self);
 }
 _declspec(dllexport) auto ll_plugin_unload(ll::plugin::NativePlugin& self) -> bool {
-    return hosihikari_preload::unload(self);
+    return hosihikari_host::unload(self);
 }
 }
