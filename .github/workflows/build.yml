@@ -29,6 +29,6 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          name: Hosihikari.Preload-windows-x64-${{ github.sha }}
+          name: Hosihikari.Host-windows-x64-${{ github.sha }}
           path: |
             x64/Release/
