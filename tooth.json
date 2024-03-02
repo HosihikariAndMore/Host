@@ -1,7 +1,7 @@
 {
     "format_version": 2,
     "tooth": "github.com/HosihikariAndMore/Host",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "info": {
         "name": "Host of 星光",
         "description": "CLR hosting of LeviLamina",
@@ -12,9 +12,9 @@
         {
             "goos": "windows",
             "goarch": "amd64",
-            "asset_url": "https://github.com/HosihikariAndMore/Host/releases/download/v1.0.0/hosihikari.host.win-x64.zip",
+            "asset_url": "https://github.com/HosihikariAndMore/Host/releases/download/v1.0.1/hosihikari.host.win-x64.zip",
             "prerequisites": {
-                "github.com/LiteLDev/LeviLamina": "0.8.x"
+                "github.com/LiteLDev/LeviLamina": "0.9.x"
             },
             "files": {
                 "place": [
