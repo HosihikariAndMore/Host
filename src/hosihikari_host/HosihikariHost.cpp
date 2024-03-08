@@ -3,7 +3,7 @@
 #include <ll/api/plugin/NativePlugin.h>
 #include <memory>
 
-#include "src/main.h"
+#include "../main.h"
 
 namespace hosihikari_host {
 
