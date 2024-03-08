@@ -6,7 +6,7 @@
         "name": "Host of 星光",
         "description": "CLR hosting of LeviLamina",
         "author": "星光 Community",
-        "tags": ["Hosihikari", "dotNET", "Hosting", "CoreCLR", "CLR"]
+        "tags": ["hosihikari", "dotnet", "hosting", "clr"]
     },
     "platforms": [
         {
