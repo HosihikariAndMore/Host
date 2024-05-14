@@ -1,8 +1,11 @@
 #pragma once
 
+#include <dotnet.h>
+
 #include "ll/api/plugin/NativePlugin.h"
 
-namespace hosihikari_host {
+namespace hosihikari {
+namespace host {
 
 class HosihikariHost {
 
@@ -14,7 +17,7 @@ public:
     [[nodiscard]] ll::plugin::NativePlugin& getSelf() const { return mSelf; }
 
     /// @return True if the plugin is loaded successfully.
-    bool load();
+    bool load() const;
 
     /// @return True if the plugin is enabled successfully.
     bool enable();
@@ -26,8 +29,12 @@ public:
     // /// @return True if the plugin is unloaded successfully.
     // bool unload();
 
+public:
+    get_function_pointer_fn getFunctionPointerFptr() const;
+
 private:
     ll::plugin::NativePlugin& mSelf;
 };
 
-} // namespace hosihikari_host
+} // namespace host
+} // namespace hosihikari
