@@ -89,15 +89,14 @@ ll::Expected<> hosihikari::HosihikariPluginManager::unload(std::string_view name
 }
 
 std::pair<PluginHandle::InteropArg, PluginHandle> HosihikariPluginManager::loadPlugin(char const* path) {
-    if (mfptrInitialized) {
-        PluginHandle::InteropArg arg{};
-        void*                    handle;
-        mLoadPlugin(path, &handle, &arg, PluginHandle::InteropArg::callback);
-        return {arg, {handle}};
+    if (!mfptrInitialized) {
+        hosihikari::host::HosihikariHost::getInstance().getSelf().getLogger().error("Plugin handle not initialized");
+        return {};
     }
-    hosihikari::host::HosihikariHost::getInstance().getSelf().getLogger().error("Plugin handle not initialized");
-
-    return {};
+    PluginHandle::InteropArg arg{};
+    void*                    handle;
+    mLoadPlugin(path, &handle, &arg, PluginHandle::InteropArg::callback);
+    return {arg, {handle}};
 }
 
 void HosihikariPluginManager::initialize_methods() {

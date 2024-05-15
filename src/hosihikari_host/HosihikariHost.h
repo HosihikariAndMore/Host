@@ -12,9 +12,9 @@ class HosihikariHost {
 public:
     static HosihikariHost& getInstance();
 
-    HosihikariHost(ll::plugin::NativePlugin& self) : mSelf(self) {}
+    HosihikariHost(ll::plugin::NativePlugin&);
 
-    [[nodiscard]] ll::plugin::NativePlugin& getSelf() const { return mSelf; }
+    [[nodiscard]] ll::plugin::NativePlugin& getSelf() const;
 
     /// @return True if the plugin is loaded successfully.
     bool load() const;

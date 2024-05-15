@@ -16,6 +16,10 @@ static std::unique_ptr<HosihikariHost> instance;
 
 HosihikariHost& HosihikariHost::getInstance() { return *instance; }
 
+HosihikariHost::HosihikariHost(ll::plugin::NativePlugin& self) : mSelf(self) {}
+
+ll::plugin::NativePlugin& HosihikariHost::getSelf() const { return mSelf; }
+
 bool HosihikariHost::load() const {
     auto& logger = getSelf().getLogger();
     init_loading(logger);

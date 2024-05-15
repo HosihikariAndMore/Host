@@ -23,19 +23,4 @@ void init_loading(ll::Logger& logger) {
         logger.info("Failed to load plugin management: {}\n", rc);
         return;
     }
-    //typedef void(CORECLR_DELEGATE_CALLTYPE * entry_point_fn)();
-    //entry_point_fn entry_point = nullptr;
-    //rc                         = get_function_pointer_fptr(
-    //    MAIN_NAMESPACE L"." PLUGIN_MANAGEMENT_NAMESPACE L".Main, " MAIN_NAMESPACE L"." PLUGIN_MANAGEMENT_NAME,
-    //    L"Initialize",
-    //    UNMANAGEDCALLERSONLY_METHOD,
-    //    nullptr,
-    //    nullptr,
-    //    (void**)&entry_point
-    //);
-    //if (rc != 0) {
-    //    logger.info("Failed to get entry point from plugin management: {}\n", rc);
-    //    return;
-    //}
-    //entry_point();
 }

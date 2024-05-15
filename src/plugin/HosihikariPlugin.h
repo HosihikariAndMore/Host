@@ -14,12 +14,12 @@ class HosihikariPlugin : public ll::plugin::Plugin {
     friend class HosihikariPluginManager;
 
 public:
-    HosihikariPlugin(const ll::plugin::Manifest& manifest);
+    HosihikariPlugin(const ll::plugin::Manifest&);
 
 private:
     PluginHandle mHandle;
 
 public:
-    PluginHandle& getHandle() { return mHandle; }
+    PluginHandle& getHandle();
 };
 } // namespace hosihikari

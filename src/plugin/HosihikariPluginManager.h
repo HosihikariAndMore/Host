@@ -26,10 +26,8 @@ private:
 private:
     static std::pair<PluginHandle::InteropArg, PluginHandle> loadPlugin(char const* path);
 
-    using plugin_manager_method_fn = void(__stdcall*)(char const*,
-                                                       void**                    handle,
-                                                       PluginHandle::InteropArg* arg,
-                                                       PluginHandle::plugin_handle_callback_t*);
+    using plugin_manager_method_fn =
+        void(__stdcall*)(char const*, void**, PluginHandle::InteropArg*, PluginHandle::plugin_handle_callback_t*);
 
     static plugin_manager_method_fn mLoadPlugin;
     static bool                     mfptrInitialized;
