@@ -22,13 +22,22 @@ ll::Expected<> hosihikari::HosihikariPluginManager::load(ll::plugin::Manifest ma
     }
     auto plugin = std::make_shared<HosihikariPlugin>(std::move(manifest));
 
-    auto        pluginDir = std::filesystem::canonical(ll::plugin::getPluginsRoot() / plugin->getManifest().name);
-    auto        entry     = pluginDir / plugin->getManifest().entry;
-    std::string name      = plugin->getManifest().name;
+    auto pluginDir = std::filesystem::canonical(ll::plugin::getPluginsRoot() / plugin->getManifest().name);
 
-    auto handle = loadPlugin(entry.string().c_str(), errorHandler);
-    if (!errorMessage.empty()) return ll::makeStringError(errorMessage);
-    plugin->getHandle() = handle;
+    if (plugin->getManifest().entry.empty())
+        return ll::makeStringError(fmt::format("Plugin entry not found: {0}", pluginDir.string()));
+
+    auto entry = pluginDir / plugin->getManifest().entry;
+
+    if (!std::filesystem::exists(entry) or std::filesystem::is_directory(entry))
+        return ll::makeStringError(fmt::format("Plugin entry not found: {0}", entry.string()));
+
+    std::string name = plugin->getManifest().name;
+
+    auto result = loadPlugin(entry.string().c_str());
+    if (!result.first.success) return ll::makeStringError(result.first.error.value_or(""));
+    plugin->getHandle() = result.second;
+
     plugin->onLoad([](ll::plugin::Plugin& plugin) -> bool {
         auto ret = reinterpret_cast<HosihikariPlugin&>(plugin).getHandle().load();
         if (!ret.success) {
@@ -79,9 +88,12 @@ ll::Expected<> hosihikari::HosihikariPluginManager::unload(std::string_view name
     return {};
 }
 
-PluginHandle HosihikariPluginManager::loadPlugin(char const* path, error_handler_fn handler) {
+std::pair<PluginHandle::InteropArg, PluginHandle> HosihikariPluginManager::loadPlugin(char const* path) {
     if (mfptrInitialized) {
-        return {mLoadPlugin(path, handler)};
+        PluginHandle::InteropArg arg{};
+        void*                    handle;
+        mLoadPlugin(path, &handle, &arg, PluginHandle::InteropArg::callback);
+        return {arg, {handle}};
     }
     hosihikari::host::HosihikariHost::getInstance().getSelf().getLogger().error("Plugin handle not initialized");
 

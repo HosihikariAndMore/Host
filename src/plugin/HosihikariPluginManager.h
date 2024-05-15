@@ -24,10 +24,12 @@ private:
     ll::Expected<> unload(std::string_view name) override;
 
 private:
-    using error_handler_fn = void(__stdcall*)(char const*);
-    static PluginHandle loadPlugin(char const* path, error_handler_fn);
+    static std::pair<PluginHandle::InteropArg, PluginHandle> loadPlugin(char const* path);
 
-    using plugin_manager_method_fn = void*(__stdcall*)(char const*, error_handler_fn);
+    using plugin_manager_method_fn = void(__stdcall*)(char const*,
+                                                       void**                    handle,
+                                                       PluginHandle::InteropArg* arg,
+                                                       PluginHandle::plugin_handle_callback_t*);
 
     static plugin_manager_method_fn mLoadPlugin;
     static bool                     mfptrInitialized;

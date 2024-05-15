@@ -69,10 +69,9 @@ public:
         return arg;
     }
 
-
-private:
     using plugin_handle_callback_t = void(__stdcall)(InteropArg*, int, char const*);
 
+private:
     using plugin_handle_method_fn = void(__stdcall*)(void*, InteropArg*, plugin_handle_callback_t*);
 
     static plugin_handle_method_fn mLoad;
