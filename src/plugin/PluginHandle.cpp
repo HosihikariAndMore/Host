@@ -69,8 +69,8 @@ void PluginHandle::initialize_methods() {
     auto& host = hosihikari::host::HosihikariHost::getInstance();
 
     auto rc = host.getFunctionPointerFptr()(
-        MAIN_NAMESPACE L"." PLUGIN_MANAGEMENT_NAMESPACE L".Main,"
-                       L" " MAIN_NAMESPACE L"." PLUGIN_MANAGEMENT_NAME,
+        MAIN_NAMESPACE L"." PLUGIN_MANAGEMENT_NAMESPACE L"." PLUGIN_MANAGEMENT_CLASS_NAME L","
+                                                                                          L" " MAIN_NAMESPACE L"." PLUGIN_MANAGEMENT_NAME,
         L"Load",
         UNMANAGEDCALLERSONLY_METHOD,
         nullptr,
@@ -84,8 +84,8 @@ void PluginHandle::initialize_methods() {
     }
 
     rc = host.getFunctionPointerFptr()(
-        MAIN_NAMESPACE L"." PLUGIN_MANAGEMENT_NAMESPACE L".Main,"
-                       L" " MAIN_NAMESPACE L"." PLUGIN_MANAGEMENT_NAME,
+        MAIN_NAMESPACE L"." PLUGIN_MANAGEMENT_NAMESPACE L"." PLUGIN_MANAGEMENT_CLASS_NAME L","
+                                                                                          L" " MAIN_NAMESPACE L"." PLUGIN_MANAGEMENT_NAME,
         L"Unload",
         UNMANAGEDCALLERSONLY_METHOD,
         nullptr,
@@ -99,8 +99,8 @@ void PluginHandle::initialize_methods() {
     }
 
     rc = host.getFunctionPointerFptr()(
-        MAIN_NAMESPACE L"." PLUGIN_MANAGEMENT_NAMESPACE L".Main,"
-                       L" " MAIN_NAMESPACE L"." PLUGIN_MANAGEMENT_NAME,
+        MAIN_NAMESPACE L"." PLUGIN_MANAGEMENT_NAMESPACE L"." PLUGIN_MANAGEMENT_CLASS_NAME L","
+                                                                                          L" " MAIN_NAMESPACE L"." PLUGIN_MANAGEMENT_NAME,
         L"Enable",
         UNMANAGEDCALLERSONLY_METHOD,
         nullptr,
@@ -114,8 +114,8 @@ void PluginHandle::initialize_methods() {
     }
 
     rc = host.getFunctionPointerFptr()(
-        MAIN_NAMESPACE L"." PLUGIN_MANAGEMENT_NAMESPACE L".Main,"
-                       L" " MAIN_NAMESPACE L"." PLUGIN_MANAGEMENT_NAME,
+        MAIN_NAMESPACE L"." PLUGIN_MANAGEMENT_NAMESPACE L"." PLUGIN_MANAGEMENT_CLASS_NAME L","
+                                                                                          L" " MAIN_NAMESPACE L"." PLUGIN_MANAGEMENT_NAME,
         L"Disable",
         UNMANAGEDCALLERSONLY_METHOD,
         nullptr,
@@ -129,8 +129,8 @@ void PluginHandle::initialize_methods() {
     }
 
     rc = host.getFunctionPointerFptr()(
-        MAIN_NAMESPACE L"." PLUGIN_MANAGEMENT_NAMESPACE L".Main,"
-                       L" " MAIN_NAMESPACE L"." PLUGIN_MANAGEMENT_NAME,
+        MAIN_NAMESPACE L"." PLUGIN_MANAGEMENT_NAMESPACE L"." PLUGIN_MANAGEMENT_CLASS_NAME L","
+                                                                                          L" " MAIN_NAMESPACE L"." PLUGIN_MANAGEMENT_NAME,
         L"ReleaseHandle",
         UNMANAGEDCALLERSONLY_METHOD,
         nullptr,

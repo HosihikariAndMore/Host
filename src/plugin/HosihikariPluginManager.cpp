@@ -102,7 +102,8 @@ std::pair<PluginHandle::InteropArg, PluginHandle> HosihikariPluginManager::loadP
 void HosihikariPluginManager::initialize_methods() {
     auto& host = hosihikari::host::HosihikariHost::getInstance();
     auto  rc   = host.getFunctionPointerFptr()(
-        MAIN_NAMESPACE L"." PLUGIN_MANAGEMENT_NAMESPACE L".Main, " MAIN_NAMESPACE L"." PLUGIN_MANAGEMENT_NAME,
+        MAIN_NAMESPACE L"." PLUGIN_MANAGEMENT_NAMESPACE L"." PLUGIN_MANAGEMENT_CLASS_NAME L","
+                                                                                          L" " MAIN_NAMESPACE L"." PLUGIN_MANAGEMENT_NAME,
         L"LoadPluginUnmanaged",
         UNMANAGEDCALLERSONLY_METHOD,
         nullptr,
